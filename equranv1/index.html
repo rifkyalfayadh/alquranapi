@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <div class="container">
+    </div>
+
+    <script>
+        $.ajax({
+            type: "GET",
+            url: 'https://equran.id/api/v2/surat',
+            success: function(response){
+                let quranLength = response.data.length;
+
+                for(i=0; i < quranLength; i++){
+                    let surat = response.data[i];
+      
+                    $('.container').append(`
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">${surat.namaLatin} (${surat.nama})</h5>
+                                <p class="card-text">Surat Ke: ${surat.nomor}</p>
+                                <p class="card-text">Jumlah Ayat: ${surat.jumlahAyat}</p>
+                                
+                            </div>
+                        </div>
+                    `);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
